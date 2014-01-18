@@ -1,4 +1,3 @@
-c5_ajax_page_list
-=================
+# concrete5 Ajax Page List
 
-Implementing Ajax block template in concrete5
+This is not a package. This is an example of implementing ajax block custom template.
