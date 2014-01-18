@@ -1,5 +1,9 @@
 <?php  defined('C5_EXECUTE') or die("Access Denied.");
 
+if (!Loader::helper('validation/numbers')->integer($_REQUEST['bID'])) {
+	die(t('Access Denied'));
+}
+
 $bID = $_REQUEST['bID'];
 $b = Block::getByID($bID);
 
