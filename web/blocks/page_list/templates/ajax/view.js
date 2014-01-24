@@ -3,7 +3,9 @@ $(function(){
 		url: CCM_TOOLS_PATH + '/page_list',
 		type: 'get',
 		data: {
-			bID: $('#ccm-ajax-page-list').attr('data-bid')
+			bID: $('#ccm-ajax-page-list').attr('data-bid'),
+			cID: $('#ccm-ajax-page-list').attr('data-cid'),
+			aHandle: $('#ccm-ajax-page-list').attr('data-ahandle')
 		}
 	}).done(function(response){
 		$('#ccm-ajax-page-list-loading').hide();

@@ -1,7 +1,8 @@
 <?php  defined('C5_EXECUTE') or die("Access Denied.");
 
 // Validate request
-if (!Loader::helper('validation/numbers')->integer($_REQUEST['bID'])) {
+$nh = Loader::helper('validation/numbers');
+if (!$nh->integer($_REQUEST['bID']) || !$nh->integer($_REQUEST['cID'])) {
 	die(t('Access Denied'));
 }
 
@@ -9,8 +10,12 @@ if (!Loader::helper('validation/numbers')->integer($_REQUEST['bID'])) {
 $bID = $_REQUEST['bID'];
 $b = Block::getByID($bID);
 
-// Check Block exists
-if (is_object($b) && !$b->isError()) {
+// Get Page object
+$cID = $_REQUEST['cID'];
+$c = Page::getByID($cID);
+
+// Check Block & Page object
+if (is_object($b) && !$b->isError() && is_object($c) && !$c->isError()) {
 	
 	// Check block type handle
 	if ($b->getBlockTypeHandle() != 'page_list') {
@@ -18,7 +23,7 @@ if (is_object($b) && !$b->isError()) {
 	}
 	
 	// Check whether or not to user can read the block
-	$bp = new Permissions($b);
+	$bp = new Permissions($b, $c, $_REQUEST['aHandle']);
 	if (!$bp->canRead()) {
 		die(t('Access Denied'));
 	}
